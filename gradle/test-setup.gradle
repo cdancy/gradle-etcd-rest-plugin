@@ -1,0 +1,28 @@
+sourceSets {
+    testSetup {
+        groovy.srcDir file('src/testSetup/groovy')
+        resources.srcDir file('src/testSetup/resources')
+        compileClasspath += configurations.testRuntime
+        runtimeClasspath += output + compileClasspath
+    }
+}
+
+tasks.withType(Test) { task ->
+	testLogging {
+		showStandardStreams = true
+		events 'started', 'passed', 'failed'
+	}
+
+    def etcdUrl = resolveProperty('etcdUrl')
+    if(etcdUrl) {
+        logger.quiet "Using Etcd URL '$etcdUrl' for executing tests with task '$task.name'."
+        systemProperty 'etcdUrl', etcdUrl
+    }
+}
+
+String resolveProperty(String propKey) {
+    String propValue = System.getenv()[propKey]
+
+    if(propValue) { return propValue }
+    hasProperty(propKey) ? getProperty(propKey) : null
+}
