@@ -13,23 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.cdancy.gradle.etcd.rest.tasks.miscellaneous
+package com.cdancy.gradle.etcd.rest.tasks.statistics
 
 import com.cdancy.gradle.etcd.rest.tasks.AbstractEtcdRestTask;
 
 /**
- * Wrapper of instance <a href="https://github.com/cdancy/etcd-rest/blob/master/src/main/java/com/cdancy/etcd/rest/domain/miscellaneous/Version.java">Version</a>
+ * Wrapper of instance <a href="https://github.com/cdancy/etcd-rest/blob/master/src/main/java/com/cdancy/etcd/rest/domain/statistics/Self.java">Self</a>
  */
-class Version extends AbstractEtcdRestTask {
+class Self extends AbstractEtcdRestTask {
 
-    private def version
+    private def self
 
     @Override
     void runRemoteCommand(etcdClient) {
-        def api = etcdClient.api().miscellaneousApi()
-        version = api.version()
-        logger.quiet "Version: ${version.toString()}"
+        def api = etcdClient.api().statisticsApi()
+        self = api.self()
+        logger.quiet "Self: ${self.toString()}"
     }
 
-    def version() { version }
+    def self() { self }
 }

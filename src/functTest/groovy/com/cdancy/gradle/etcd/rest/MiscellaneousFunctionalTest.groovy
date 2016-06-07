@@ -4,9 +4,9 @@ import org.gradle.testkit.runner.BuildResult
 import spock.lang.Requires
 
 @Requires({ TestPrecondition.ETCD_URL_REACHABLE })
-class EtcdVersionFunctionalTest extends AbstractFunctionalTest {
+class MiscellaneousFunctionalTest extends AbstractFunctionalTest {
 
-    def "Can get Etcd version"() {
+    def "Can get etcd version"() {
 
         buildFile << """
             task getVersion(type: com.cdancy.gradle.etcd.rest.tasks.miscellaneous.Version) {}
@@ -20,7 +20,6 @@ class EtcdVersionFunctionalTest extends AbstractFunctionalTest {
         BuildResult result = build('workflow')
 
         then:
-        result.output.contains('Server-Version:')
-        result.output.contains('Cluster-Version:')
+        result.output.contains('Version:')
     }
 }
