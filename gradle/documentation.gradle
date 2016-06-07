@@ -11,7 +11,7 @@ buildscript {
 apply plugin: org.ajoberstar.gradle.git.ghpages.GithubPagesPlugin
 
 githubPages {
-    repoUri = 'https://github.com/cdancy/gradle-artifactory-rest-plugin.git'
+    repoUri = 'https://github.com/cdancy/gradle-etcd-rest-plugin.git'
 
     pages {
         from(groovydoc.outputs.files) {
