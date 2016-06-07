@@ -29,6 +29,9 @@ groovydocs can be found via [github pages here](http://cdancy.github.io/gradle-e
 | Name | Description |
 | --- | --- |
 | [Version](https://github.com/cdancy/gradle-etcd-rest-plugin/blob/master/src/main/groovy/com/cdancy/gradle/etcd/rest/tasks/miscellaneous/Version.groovy) | Get the version of etcd |
+| [Leader](https://github.com/cdancy/gradle-etcd-rest-plugin/blob/master/src/main/groovy/com/cdancy/gradle/etcd/rest/tasks/statistics/Leader.groovy) | Get the current leader of cluster |
+| [Self](https://github.com/cdancy/gradle-etcd-rest-plugin/blob/master/src/main/groovy/com/cdancy/gradle/etcd/rest/tasks/statistics/Self.groovy) | Get the self instance of cluster |
+| [Store](https://github.com/cdancy/gradle-etcd-rest-plugin/blob/master/src/main/groovy/com/cdancy/gradle/etcd/rest/tasks/statistics/Store.groovy) | Get the store (statistics) for cluster |
 
 ## Extension
 
