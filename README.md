@@ -13,7 +13,7 @@ buildscript() {
  		jcenter()
  	}
  	dependencies {
- 		classpath group: 'com.cdancy', name: 'gradle-etcd-rest-plugin', version: '0.0.1', changing: true
+ 		classpath group: 'com.cdancy', name: 'gradle-etcd-rest-plugin', version: '0.0.2', changing: true
  	}
  }
 
