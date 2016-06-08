@@ -34,23 +34,14 @@ abstract class AbstractFunctionalTest extends Specification {
         projectDir = temporaryFolder.root
         buildFile = temporaryFolder.newFile('build.gradle')
                 
-        def pluginClasspath = GradleRunner.create().withPluginClasspath().getPluginClasspath()
-            .collect { it.path.replace('\\', '\\\\') } // escape backslashes in Windows paths
-            .collect { "'$it'" }
-            .join(", ")
- 
-         // Add the logic under test to the test build
         buildFile << """
-            buildscript {
-                dependencies {
-                    classpath files($pluginClasspath)
-                }
-                repositories {
-                	jcenter()
-            	}
+            plugins {
+                id 'gradle-etcd-rest-plugin'
             }
             
-            apply plugin: 'gradle-etcd-rest-plugin'
+            repositories {
+                jcenter()
+            }
         """
 
         setupEtcdServerUrl()
@@ -75,7 +66,7 @@ abstract class AbstractFunctionalTest extends Specification {
     }
 
     private GradleRunner createAndConfigureGradleRunner(String... arguments) {
-        GradleRunner.create().withProjectDir(projectDir).withArguments(arguments)
+        GradleRunner.create().withProjectDir(projectDir).withArguments(arguments).withPluginClasspath()
     }
 
     protected String createUniqueImageId() {
