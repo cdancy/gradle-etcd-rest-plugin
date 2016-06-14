@@ -9,7 +9,13 @@ class MiscellaneousFunctionalTest extends AbstractFunctionalTest {
     def "Can get etcd version"() {
 
         buildFile << """
-            task getVersion(type: com.cdancy.gradle.etcd.rest.tasks.miscellaneous.Version) {}
+            task getVersion(type: com.cdancy.gradle.etcd.rest.tasks.miscellaneous.Version) {
+            	doLast {
+            		def foundVersion = version()
+            		println "Etcd server-version: " + foundVersion.etcdServer()
+            		println "Etcd cluster-version: " + foundVersion.etcdCluster()
+            	}
+            }
             
             task workflow {
                 dependsOn getVersion
@@ -21,6 +27,8 @@ class MiscellaneousFunctionalTest extends AbstractFunctionalTest {
 
         then:
         result.output.contains('Version:')
+        !result.output.contains('Etcd server-version: null')
+        !result.output.contains('Etcd cluster-version: null')
     }
     
     def "Can get health of cluster"() {
