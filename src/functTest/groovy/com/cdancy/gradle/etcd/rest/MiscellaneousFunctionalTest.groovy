@@ -26,10 +26,15 @@ class MiscellaneousFunctionalTest extends AbstractFunctionalTest {
     def "Can get health of cluster"() {
 
         buildFile << """
-            task getHealth(type: com.cdancy.gradle.etcd.rest.tasks.miscellaneous.Health) {}
+            task getHealth(type: com.cdancy.gradle.etcd.rest.tasks.miscellaneous.Health) {
+            	doLast {
+            		boolean status = health()
+            	    println "Cluster health good: " + status
+            	}
+            }
             
             task workflow {
-                dependsOn getHealth
+            	dependsOn getHealth
             }
         """
 
@@ -38,12 +43,18 @@ class MiscellaneousFunctionalTest extends AbstractFunctionalTest {
 
         then:
         result.output.contains('Health:')
+        result.output.contains('Cluster health good: true')
     }
     
     def "Can get metrics of cluster"() {
 
         buildFile << """
-            task getMetrics(type: com.cdancy.gradle.etcd.rest.tasks.miscellaneous.Metrics) {}
+            task getMetrics(type: com.cdancy.gradle.etcd.rest.tasks.miscellaneous.Metrics) {
+            	doLast {
+            		String foundMetrics = metrics()
+            		println "Cluster metrics: " + foundMetrics
+            	}
+            }
             
             task workflow {
                 dependsOn getMetrics
@@ -55,5 +66,6 @@ class MiscellaneousFunctionalTest extends AbstractFunctionalTest {
 
         then:
         result.output.contains('Metrics:')
+        !result.output.contains('Cluster metrics: null')
     }
 }

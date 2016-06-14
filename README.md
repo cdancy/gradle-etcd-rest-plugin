@@ -29,9 +29,13 @@ groovydocs can be found via [github pages here](http://cdancy.github.io/gradle-e
 | Name | Description |
 | --- | --- |
 | [Version](https://github.com/cdancy/gradle-etcd-rest-plugin/blob/master/src/main/groovy/com/cdancy/gradle/etcd/rest/tasks/miscellaneous/Version.groovy) | Get the version of etcd |
+| [Health](https://github.com/cdancy/gradle-etcd-rest-plugin/blob/master/src/main/groovy/com/cdancy/gradle/etcd/rest/tasks/miscellaneous/Health.groovy) | Get the health of the cluster |
+| [Metrics](https://github.com/cdancy/gradle-etcd-rest-plugin/blob/master/src/main/groovy/com/cdancy/gradle/etcd/rest/tasks/miscellaneous/Metrics.groovy) | Get the metrics of the cluster |
 | [Leader](https://github.com/cdancy/gradle-etcd-rest-plugin/blob/master/src/main/groovy/com/cdancy/gradle/etcd/rest/tasks/statistics/Leader.groovy) | Get the current leader of cluster |
 | [Self](https://github.com/cdancy/gradle-etcd-rest-plugin/blob/master/src/main/groovy/com/cdancy/gradle/etcd/rest/tasks/statistics/Self.groovy) | Get the self instance of cluster |
 | [Store](https://github.com/cdancy/gradle-etcd-rest-plugin/blob/master/src/main/groovy/com/cdancy/gradle/etcd/rest/tasks/statistics/Store.groovy) | Get the store (statistics) for cluster |
+| [List](https://github.com/cdancy/gradle-etcd-rest-plugin/blob/master/src/main/groovy/com/cdancy/gradle/etcd/rest/tasks/members/List.groovy) | List of members in cluster |
+
 
 ## Extension
 

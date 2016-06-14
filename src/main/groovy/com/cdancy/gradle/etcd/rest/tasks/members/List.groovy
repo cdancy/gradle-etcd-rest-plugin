@@ -13,23 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.cdancy.gradle.etcd.rest.tasks.miscellaneous
+package com.cdancy.gradle.etcd.rest.tasks.members
 
 import com.cdancy.gradle.etcd.rest.tasks.AbstractEtcdRestTask;
 
 /**
- * Get the cluster <a href="https://github.com/cdancy/etcd-rest/blob/master/src/main/java/com/cdancy/etcd/rest/features/MiscellaneousApi.java#L55">Metrics</a>
+ * List all instance in cluster of <a href="https://github.com/cdancy/etcd-rest/blob/master/src/main/java/com/cdancy/etcd/rest/domain/members/Member.java">Member</a>
  */
-class Metrics extends AbstractEtcdRestTask {
+class List extends AbstractEtcdRestTask {
 
-    private String metrics
+    private def members = []
 
     @Override
     void runRemoteCommand(etcdClient) {
-        def api = etcdClient.api().miscellaneousApi()
-        metrics = api.metrics()
-        logger.quiet "Metrics: ${metrics}"
+        def api = etcdClient.api().membersApi()
+        members.addAll api.list()
+        logger.quiet "Members: ${members.toString()}"
     }
 
-    String metrics() { metrics }
+    def members() { members }
 }

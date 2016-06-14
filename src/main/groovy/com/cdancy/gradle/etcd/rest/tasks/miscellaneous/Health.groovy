@@ -18,11 +18,11 @@ package com.cdancy.gradle.etcd.rest.tasks.miscellaneous
 import com.cdancy.gradle.etcd.rest.tasks.AbstractEtcdRestTask;
 
 /**
- * Get the health of the cluster. True if good false otherwise.
+ * Get the cluster <a href="https://github.com/cdancy/etcd-rest/blob/master/src/main/java/com/cdancy/etcd/rest/features/MiscellaneousApi.java#L49">Health</a>
  */
 class Health extends AbstractEtcdRestTask {
 
-    private boolean health
+    private Boolean health
 
     @Override
     void runRemoteCommand(etcdClient) {
