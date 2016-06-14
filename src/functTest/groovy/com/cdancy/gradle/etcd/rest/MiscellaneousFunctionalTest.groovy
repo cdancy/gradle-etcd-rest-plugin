@@ -22,4 +22,38 @@ class MiscellaneousFunctionalTest extends AbstractFunctionalTest {
         then:
         result.output.contains('Version:')
     }
+    
+    def "Can get health of cluster"() {
+
+        buildFile << """
+            task getHealth(type: com.cdancy.gradle.etcd.rest.tasks.miscellaneous.Health) {}
+            
+            task workflow {
+                dependsOn getHealth
+            }
+        """
+
+        when:
+        BuildResult result = build('workflow')
+
+        then:
+        result.output.contains('Health:')
+    }
+    
+    def "Can get metrics of cluster"() {
+
+        buildFile << """
+            task getMetrics(type: com.cdancy.gradle.etcd.rest.tasks.miscellaneous.Metrics) {}
+            
+            task workflow {
+                dependsOn getMetrics
+            }
+        """
+
+        when:
+        BuildResult result = build('workflow')
+
+        then:
+        result.output.contains('Metrics:')
+    }
 }
