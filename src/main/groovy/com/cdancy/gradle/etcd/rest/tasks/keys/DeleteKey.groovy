@@ -16,18 +16,16 @@
 package com.cdancy.gradle.etcd.rest.tasks.keys
 
 import com.cdancy.gradle.etcd.rest.tasks.KeyValueAware
-import org.gradle.api.tasks.Input
-import org.gradle.api.tasks.Optional;
 
 /**
- * Get a <a href="https://github.com/cdancy/etcd-rest/blob/master/src/main/java/com/cdancy/etcd/rest/features/KeysApi.java#L73">Key</a>
+ * Delete a <a href="https://github.com/cdancy/etcd-rest/blob/master/src/main/java/com/cdancy/etcd/rest/features/KeysApi.java#L85">Key</a>
  */
-class GetKey extends KeyValueAware {
+class DeleteKey extends KeyValueAware {
 
     @Override
     void runRemoteCommand(etcdClient) {
         def api = etcdClient.api().keysApi()
-        instance = api.getKey(key())
-        logger.quiet "Get Key: ${instance}"
+        instance = api.deleteKey(key())
+        logger.quiet "Delete Key: ${instance}"
     }
 }

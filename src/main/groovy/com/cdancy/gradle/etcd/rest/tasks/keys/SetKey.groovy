@@ -38,8 +38,6 @@ class SetKey extends KeyValueAware {
     @Optional
     Boolean inOrder
 
-    private def instance
-
     @Override
     void runRemoteCommand(etcdClient) {
         def api = etcdClient.api().keysApi()
@@ -58,9 +56,4 @@ class SetKey extends KeyValueAware {
         }
         logger.quiet "Set Key: ${instance}"
     }
-
-    /**
-     * @return instance of Key
-     */
-    def instance() { instance }
 }

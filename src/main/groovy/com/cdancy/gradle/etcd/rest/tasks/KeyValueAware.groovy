@@ -34,6 +34,8 @@ abstract class KeyValueAware extends AbstractEtcdRestTask {
     @Optional
     Closure<String> value
 
+    protected def instance
+
     public String key() {
         String var = key ? key.call() : null
         if (var?.trim()) {
@@ -51,5 +53,10 @@ abstract class KeyValueAware extends AbstractEtcdRestTask {
             throw new GradleException("value does not resolve to a valid String: value=" + var)
         }
     }
+
+    /**
+     * @return instance of Key
+     */
+    def instance() { instance }
 }
 

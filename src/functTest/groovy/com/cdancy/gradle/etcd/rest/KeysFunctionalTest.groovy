@@ -6,7 +6,7 @@ import spock.lang.Requires
 @Requires({ TestPrecondition.ETCD_URL_REACHABLE })
 class KeysFunctionalTest extends AbstractFunctionalTest {
 
-    def "Can set and get key"() {
+    def "Can set, get, and delete a key"() {
 
         buildFile << """
             task setKey(type: com.cdancy.gradle.etcd.rest.tasks.keys.SetKey) {
@@ -29,9 +29,17 @@ class KeysFunctionalTest extends AbstractFunctionalTest {
                     println "Key get node-value: " + foundInstance.node.value
                 }
             }
+
+            task deleteKey(type: com.cdancy.gradle.etcd.rest.tasks.keys.DeleteKey, dependsOn: getKey) {
+                key { "hello" }
+                doLast {
+                    def foundInstance = instance()
+                    println "Key delete action: " + foundInstance.action
+                }
+            }
             
             task workflow {
-                dependsOn getKey
+                dependsOn deleteKey
             }
         """
 
@@ -46,9 +54,10 @@ class KeysFunctionalTest extends AbstractFunctionalTest {
         result.output.contains('Key ErrorMessage: null')
         result.output.contains('Key get action: get')
         result.output.contains('Key get node-value: world')
+        result.output.contains('Key delete action: delete')
     }
 
-    def "Can set and get in-order key"() {
+    def "Can set, get, and delete an in-order key"() {
 
         buildFile << """
             task setKey(type: com.cdancy.gradle.etcd.rest.tasks.keys.SetKey) {
@@ -65,11 +74,10 @@ class KeysFunctionalTest extends AbstractFunctionalTest {
             }
 
             task getKey(type: com.cdancy.gradle.etcd.rest.tasks.keys.GetKey, dependsOn: setKey) {
-                key { "hello" }
+                key { "hello-in-order" }
                 doLast {
                     def foundInstance = instance()
                     println "Key get action: " + foundInstance.action
-                    println "Key get node-value: " + foundInstance.node.value
                 }
             }
 
@@ -88,15 +96,14 @@ class KeysFunctionalTest extends AbstractFunctionalTest {
         result.output.contains('Key node-value: world-in-order')
         result.output.contains('Key ErrorMessage: null')
         result.output.contains('Key get action: get')
-        result.output.contains('Key get node-value: world')
     }
 
     def "Can set key with ttl"() {
 
         buildFile << """
             task setKey(type: com.cdancy.gradle.etcd.rest.tasks.keys.SetKey) {
-                key { "hello" }
-                value { "world" }
+                key { "hello-ttl" }
+                value { "world-ttl" }
                 ttl = 1
             	doLast {
             		sleep 2000
@@ -104,15 +111,23 @@ class KeysFunctionalTest extends AbstractFunctionalTest {
             }
 
             task getKey(type: com.cdancy.gradle.etcd.rest.tasks.keys.GetKey, dependsOn: setKey) {
-                key { "hello" }
+                key { "hello-ttl" }
                 doLast {
                     def foundInstance = instance()
                     println "Key ErrorMessage: " + foundInstance.errorMessage.message
                 }
             }
 
+            task deleteKey(type: com.cdancy.gradle.etcd.rest.tasks.keys.DeleteKey, dependsOn: getKey) {
+                key { "hello-ttl" }
+                doLast {
+                    def foundInstance = instance()
+                    println "Key Delete ErrorMessage: " + foundInstance.errorMessage.message
+                }
+            }
+
             task workflow {
-                dependsOn getKey
+                dependsOn deleteKey
             }
         """
 
@@ -121,5 +136,6 @@ class KeysFunctionalTest extends AbstractFunctionalTest {
 
         then:
         result.output.contains('Key ErrorMessage: Key not found')
+        result.output.contains('Key Delete ErrorMessage: Key not found')
     }
 }
