@@ -1,5 +1,7 @@
 com.cdancy.gradle.etcd.rest
 com.cdancy.gradle.etcd.rest.tasks
+com.cdancy.gradle.etcd.rest.tasks.keys
+com.cdancy.gradle.etcd.rest.tasks.members
 com.cdancy.gradle.etcd.rest.tasks.miscellaneous
 com.cdancy.gradle.etcd.rest.tasks.statistics
 com.cdancy.gradle.etcd.rest.utils
