@@ -22,11 +22,9 @@ import org.gradle.api.tasks.Optional
 abstract class KeyValueAware extends AbstractEtcdRestTask {
 
     @Input
-    @Optional
     Closure<String> key
 
     @Input
-    @Optional
     Closure<String> value
 
     public String key() {
