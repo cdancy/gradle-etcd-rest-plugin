@@ -36,6 +36,7 @@ groovydocs can be found via [github pages here](http://cdancy.github.io/gradle-e
 | [Store](https://github.com/cdancy/gradle-etcd-rest-plugin/blob/master/src/main/groovy/com/cdancy/gradle/etcd/rest/tasks/statistics/Store.groovy) | Get the store (statistics) for cluster |
 | [List](https://github.com/cdancy/gradle-etcd-rest-plugin/blob/master/src/main/groovy/com/cdancy/gradle/etcd/rest/tasks/members/List.groovy) | List of members in cluster |
 | [SetKey](https://github.com/cdancy/gradle-etcd-rest-plugin/blob/master/src/main/groovy/com/cdancy/gradle/etcd/rest/tasks/keys/SetKey.groovy) | Set key in cluster |
+| [GetKey](https://github.com/cdancy/gradle-etcd-rest-plugin/blob/master/src/main/groovy/com/cdancy/gradle/etcd/rest/tasks/keys/GetKey.groovy) | Get key in cluster |
 
 
 ## Extension

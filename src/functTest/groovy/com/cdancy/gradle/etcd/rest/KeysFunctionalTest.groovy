@@ -6,7 +6,7 @@ import spock.lang.Requires
 @Requires({ TestPrecondition.ETCD_URL_REACHABLE })
 class KeysFunctionalTest extends AbstractFunctionalTest {
 
-    def "Can set key"() {
+    def "Can set and get key"() {
 
         buildFile << """
             task setKey(type: com.cdancy.gradle.etcd.rest.tasks.keys.SetKey) {
@@ -20,9 +20,18 @@ class KeysFunctionalTest extends AbstractFunctionalTest {
             		println "Key ErrorMessage: " + foundInstance.errorMessage
             	}
             }
+
+            task getKey(type: com.cdancy.gradle.etcd.rest.tasks.keys.GetKey, dependsOn: setKey) {
+                key { "hello" }
+                doLast {
+                    def foundInstance = instance()
+                    println "Key get action: " + foundInstance.action
+                    println "Key get node-value: " + foundInstance.node.value
+                }
+            }
             
             task workflow {
-                dependsOn setKey
+                dependsOn getKey
             }
         """
 
@@ -30,14 +39,16 @@ class KeysFunctionalTest extends AbstractFunctionalTest {
         BuildResult result = build('workflow')
 
         then:
-        result.output.contains('Set Key:')
+        result.output.contains('Get Key:')
         result.output.contains('Key action: set')
         result.output.contains('Key node-key: /hello')
         result.output.contains('Key node-value: world')
         result.output.contains('Key ErrorMessage: null')
+        result.output.contains('Key get action: get')
+        result.output.contains('Key get node-value: world')
     }
 
-    def "Can set in-order key"() {
+    def "Can set and get in-order key"() {
 
         buildFile << """
             task setKey(type: com.cdancy.gradle.etcd.rest.tasks.keys.SetKey) {
@@ -53,8 +64,17 @@ class KeysFunctionalTest extends AbstractFunctionalTest {
             	}
             }
 
+            task getKey(type: com.cdancy.gradle.etcd.rest.tasks.keys.GetKey, dependsOn: setKey) {
+                key { "hello" }
+                doLast {
+                    def foundInstance = instance()
+                    println "Key get action: " + foundInstance.action
+                    println "Key get node-value: " + foundInstance.node.value
+                }
+            }
+
             task workflow {
-                dependsOn setKey
+                dependsOn getKey
             }
         """
 
@@ -67,5 +87,7 @@ class KeysFunctionalTest extends AbstractFunctionalTest {
         result.output.contains('Key node-key: /hello-in-order')
         result.output.contains('Key node-value: world-in-order')
         result.output.contains('Key ErrorMessage: null')
+        result.output.contains('Key get action: get')
+        result.output.contains('Key get node-value: world')
     }
 }

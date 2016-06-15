@@ -25,6 +25,7 @@ abstract class KeyValueAware extends AbstractEtcdRestTask {
     Closure<String> key
 
     @Input
+    @Optional
     Closure<String> value
 
     public String key() {
