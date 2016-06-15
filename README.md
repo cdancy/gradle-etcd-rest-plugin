@@ -13,7 +13,7 @@ buildscript() {
  		jcenter()
  	}
  	dependencies {
- 		classpath group: 'com.cdancy', name: 'gradle-etcd-rest-plugin', version: '0.0.2', changing: true
+ 		classpath group: 'com.cdancy', name: 'gradle-etcd-rest-plugin', version: '0.0.3', changing: true
  	}
  }
 
@@ -37,7 +37,7 @@ groovydocs can be found via [github pages here](http://cdancy.github.io/gradle-e
 | [List](https://github.com/cdancy/gradle-etcd-rest-plugin/blob/master/src/main/groovy/com/cdancy/gradle/etcd/rest/tasks/members/List.groovy) | List of members in cluster |
 | [SetKey](https://github.com/cdancy/gradle-etcd-rest-plugin/blob/master/src/main/groovy/com/cdancy/gradle/etcd/rest/tasks/keys/SetKey.groovy) | Set key in cluster |
 | [GetKey](https://github.com/cdancy/gradle-etcd-rest-plugin/blob/master/src/main/groovy/com/cdancy/gradle/etcd/rest/tasks/keys/GetKey.groovy) | Get key in cluster |
-
+| [DeleteKey](https://github.com/cdancy/gradle-etcd-rest-plugin/blob/master/src/main/groovy/com/cdancy/gradle/etcd/rest/tasks/keys/DeleteKey.groovy) | Delete key in cluster |
 
 ## Extension
 
