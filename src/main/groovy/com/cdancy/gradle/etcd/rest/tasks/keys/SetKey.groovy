@@ -24,10 +24,16 @@ import org.gradle.api.tasks.Optional;
  */
 class SetKey extends KeyValueAware {
 
+    /**
+     * Time to live in seconds
+     */
 	@Input
     @Optional
     Integer ttl
 
+    /**
+     * Whether to create an in order key
+     */
     @Input
     @Optional
     Boolean inOrder
@@ -53,5 +59,8 @@ class SetKey extends KeyValueAware {
         logger.quiet "Set Key: ${instance}"
     }
 
+    /**
+     * @return instance of Key
+     */
     def instance() { instance }
 }

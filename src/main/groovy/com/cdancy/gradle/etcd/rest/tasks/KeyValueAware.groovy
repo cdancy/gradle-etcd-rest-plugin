@@ -21,9 +21,15 @@ import org.gradle.api.tasks.Optional
 
 abstract class KeyValueAware extends AbstractEtcdRestTask {
 
+    /**
+     * Key to set in cluster
+     */
     @Input
     Closure<String> key
 
+    /**
+     * Value of key to set in cluster
+     */
     @Input
     @Optional
     Closure<String> value

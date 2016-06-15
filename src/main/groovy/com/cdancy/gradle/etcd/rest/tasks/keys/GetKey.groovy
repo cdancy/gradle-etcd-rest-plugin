@@ -33,5 +33,8 @@ class GetKey extends KeyValueAware {
         logger.quiet "Get Key: ${instance}"
     }
 
+    /**
+     * @return instance of Key
+     */
     def instance() { instance }
 }

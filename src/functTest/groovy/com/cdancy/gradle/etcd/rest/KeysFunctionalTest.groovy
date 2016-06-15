@@ -90,4 +90,36 @@ class KeysFunctionalTest extends AbstractFunctionalTest {
         result.output.contains('Key get action: get')
         result.output.contains('Key get node-value: world')
     }
+
+    def "Can set key with ttl"() {
+
+        buildFile << """
+            task setKey(type: com.cdancy.gradle.etcd.rest.tasks.keys.SetKey) {
+                key { "hello" }
+                value { "world" }
+                ttl = 1
+            	doLast {
+            		sleep 2000
+            	}
+            }
+
+            task getKey(type: com.cdancy.gradle.etcd.rest.tasks.keys.GetKey, dependsOn: setKey) {
+                key { "hello" }
+                doLast {
+                    def foundInstance = instance()
+                    println "Key ErrorMessage: " + foundInstance.errorMessage.message
+                }
+            }
+
+            task workflow {
+                dependsOn getKey
+            }
+        """
+
+        when:
+        BuildResult result = build('workflow')
+
+        then:
+        result.output.contains('Key ErrorMessage: Key not found')
+    }
 }
