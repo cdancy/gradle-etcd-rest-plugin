@@ -82,5 +82,5 @@ If you're looking for a new feature, or are interested in contributing, we'd lov
 	
 ## Additional Resources
 
-* [Etcd REST API](https://github.com/coreos/etcd/blob/master/Documentation/api.md)
+* [Etcd REST API](https://github.com/coreos/etcd/blob/master/Documentation/v2/api.md)
 * [etcd-rest](https://github.com/cdancy/etcd-rest)
